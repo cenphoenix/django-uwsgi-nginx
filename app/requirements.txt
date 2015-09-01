@@ -1,1 +1,10 @@
-django
+Django
+Fabric
+Pillow
+django-simple-captcha
+django-smart-selects
+requests
+shortuuid
+MySQl-python
+django-redis
+django-redis-cache
