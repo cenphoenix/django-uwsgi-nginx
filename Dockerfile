@@ -14,14 +14,14 @@
 
 from ubuntu:trusty
 
-maintainer tyhuang
+maintainer cenphoenix
 
 #run echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 run apt-get update
 run apt-get install -y build-essential git
 run apt-get install -y python python-dev python-setuptools
 run apt-get install -y nginx supervisor
-run easy_install pip
+run easy_install -i http://mirrors.aliyun.com/pypi/simple/ pip
 
 # install uwsgi now because it takes a little while
 run pip install uwsgi
@@ -31,6 +31,9 @@ run apt-get install -y python-software-properties
 #run apt-get update
 RUN apt-get install nginx
 run apt-get install -y sqlite3
+run apt-get install -y libmysqld-dev
+run apt-get install -y libmysqlclient-dev
+run apt-get install -y mysql-client
 
 # install our code
 add . /home/docker/code/
@@ -46,7 +49,7 @@ run pip install -r /home/docker/code/app/requirements.txt
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
-run django-admin.py startproject website /home/docker/code/app/ 
+# run django-admin.py startproject website /home/docker/code/app/ 
 
 expose 80
 cmd ["supervisord", "-n"]
